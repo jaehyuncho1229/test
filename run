@@ -32,3 +32,4 @@ sudo usermod -aG docker $USER
 
 start and setup jenkins
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+  50212285d6bf4fdabe788e8998c76e2f

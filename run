@@ -1,0 +1,34 @@
+Install Java and Jenkins Service
+# Install Java 17 (required by modern Jenkins versions)
+sudo apt install openjdk-17-jdk -y
+
+# Download and install Jenkins via its package repository
+curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install jenkins -y
+
+
+Install Docker
+# Install required packages
+sudo apt install ca-certificates curl gnupg lsb-release -y
+
+# Add Docker's official GPG key
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# Add Docker repository
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+# Add your user to the docker group (to run docker without sudo)
+sudo usermod -aG docker $USER
+
+start and setup jenkins
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
